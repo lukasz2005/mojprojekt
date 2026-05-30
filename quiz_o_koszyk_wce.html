@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Sędziowanie Koszykówki</title>
+    <!-- Dołączamy Tailwind CSS dla ładnego wyglądu -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Proste animacje przejścia */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Niestandardowy kolor dla motywu koszykówki */
+        .bg-basketball {
+            background-color: #ea580c; /* orange-600 */
+        }
+        .hover-bg-basketball:hover {
+            background-color: #c2410c; /* orange-700 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans antialiased min-h-screen p-4 md:p-8">
+
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Nagłówek -->
+        <div class="bg-basketball text-white p-6 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">Quiz Koszykarski 🏀</h1>
+            <p class="text-orange-100">Sprawdź swoją wiedzę o zasadach sędziowania</p>
+        </div>
+
+        <!-- Formularz Quizu -->
+        <form id="quizForm" class="p-6 md:p-8 space-y-8">
+            
+            <!-- Pytanie 1 -->
+            <div class="question-block border-b border-gray-200 pb-6" id="q1-container">
+                <p class="text-lg font-semibold mb-3">1. Czy zawodnik może zrobić trzy kroki z piłką w rękach bez rozpoczęcia kozłowania?</p>
+                <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q1" value="tak" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">Tak</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q1" value="nie" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">Nie</span>
+                    </label>
+                </div>
+                <div class="explanation hidden mt-3 p-3 rounded-lg text-sm bg-gray-50 border-l-4"></div>
+            </div>
+
+            <!-- Pytanie 2 -->
+            <div class="question-block border-b border-gray-200 pb-6" id="q2-container">
+                <p class="text-lg font-semibold mb-3">2. Ile fauli osobistych (zgodnie z przepisami FIBA) eliminuje zawodnika z dalszej gry w meczu?</p>
+                <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q2" value="A" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">A) 3</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q2" value="B" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">B) 4</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q2" value="C" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">C) 5</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q2" value="D" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">D) 6</span>
+                    </label>
+                </div>
+                <div class="explanation hidden mt-3 p-3 rounded-lg text-sm bg-gray-50 border-l-4"></div>
+            </div>
+
+            <!-- Pytanie 3 -->
+            <div class="question-block border-b border-gray-200 pb-6" id="q3-container">
+                <p class="text-lg font-semibold mb-3">3. Ile podstawowego czasu ma drużyna w ataku na przeprowadzenie akcji i oddanie rzutu na kosz?</p>
+                <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q3" value="A" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">A) 14 sekund</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q3" value="B" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">B) 24 sekundy</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q3" value="C" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">C) 30 sekund</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q3" value="D" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">D) 45 sekund</span>
+                    </label>
+                </div>
+                <div class="explanation hidden mt-3 p-3 rounded-lg text-sm bg-gray-50 border-l-4"></div>
+            </div>
+
+            <!-- Pytanie 4 -->
+            <div class="question-block border-b border-gray-200 pb-6" id="q4-container">
+                <p class="text-lg font-semibold mb-3">4. Czy zawodnik ataku, który przeszedł z piłką przez linię środkową na połowę przeciwnika, może podać ją z powrotem do kolegi stojącego na własnej połowie?</p>
+                <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q4" value="tak" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">Tak</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q4" value="nie" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">Nie</span>
+                    </label>
+                </div>
+                <div class="explanation hidden mt-3 p-3 rounded-lg text-sm bg-gray-50 border-l-4"></div>
+            </div>
+
+            <!-- Pytanie 5 -->
+            <div class="question-block border-b border-gray-200 pb-6" id="q5-container">
+                <p class="text-lg font-semibold mb-3">5. Ile punktów drużyna zdobywa za jeden celny rzut wolny (wykonywany po faulu)?</p>
+                <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q5" value="A" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">A) 0</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q5" value="B" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">B) 1</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q5" value="C" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">C) 2</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q5" value="D" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">D) 3</span>
+                    </label>
+                </div>
+                <div class="explanation hidden mt-3 p-3 rounded-lg text-sm bg-gray-50 border-l-4"></div>
+            </div>
+
+            <!-- Pytanie 6 -->
+            <div class="question-block pb-2" id="q6-container">
+                <p class="text-lg font-semibold mb-3">6. Czy zawodnik może ponownie zacząć kozłować po tym, jak zakończył pierwsze kozłowanie i złapał piłkę w obie ręce?</p>
+                <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q6" value="tak" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">Tak</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-50 transition">
+                        <input type="radio" name="q6" value="nie" class="w-5 h-5 text-orange-600 focus:ring-orange-500">
+                        <span class="ml-3">Nie</span>
+                    </label>
+                </div>
+                <div class="explanation hidden mt-3 p-3 rounded-lg text-sm bg-gray-50 border-l-4"></div>
+            </div>
+
+            <!-- Komunikat o błędzie -->
+            <div id="errorMessage" class="hidden text-red-600 font-semibold text-center mb-4">
+                Proszę odpowiedzieć na wszystkie pytania przed sprawdzeniem!
+            </div>
+
+            <!-- Wynik -->
+            <div id="resultBox" class="hidden text-center p-6 bg-gray-100 rounded-xl border-2 border-gray-200 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Twój wynik: <span id="score" class="text-orange-600"></span>/6</h2>
+                <p id="scoreMessage" class="text-gray-600"></p>
+                <button type="button" id="resetBtn" class="mt-4 px-6 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold rounded-lg transition">Rozwiąż ponownie</button>
+            </div>
+
+            <!-- Przycisk Submita -->
+            <button type="submit" id="submitBtn" class="w-full bg-basketball hover-bg-basketball text-white text-lg font-bold py-4 rounded-xl shadow-md transition transform hover:-translate-y-0.5">
+                Sprawdź Odpowiedzi
+            </button>
+            
+        </form>
+    </div>
+
+    <!-- Skrypt sprawdzający logikę quizu -->
+    <script>
+        // Baza poprawnych odpowiedzi i wyjaśnień
+        const quizData = {
+            q1: { answer: 'nie', explanation: 'Prawidłowa odpowiedź: <strong>Nie</strong>. Sędzia odgwiżdże błąd kroków - po zakończeniu kozłowania można zrobić maksymalnie dwa kroki.' },
+            q2: { answer: 'C', explanation: 'Prawidłowa odpowiedź: <strong>C</strong>. Zgodnie z przepisami FIBA, 5 fauli (osobistych/technicznych) oznacza konieczność opuszczenia boiska.' },
+            q3: { answer: 'B', explanation: 'Prawidłowa odpowiedź: <strong>B</strong>. Zegar główny czasu akcji wynosi 24 sekundy na oddanie rzutu z dotknięciem obręczy.' },
+            q4: { answer: 'nie', explanation: 'Prawidłowa odpowiedź: <strong>Nie</strong>. Sędzia odgwiżdże błąd powrotu piłki na pole obrony, tzw. "błąd połów".' },
+            q5: { answer: 'B', explanation: 'Prawidłowa odpowiedź: <strong>B</strong>. Jeden trafiony rzut wolny to zawsze 1 punkt.' },
+            q6: { answer: 'nie', explanation: 'Prawidłowa odpowiedź: <strong>Nie</strong>. Sędzia odgwiżdże błąd podwójnego kozłowania.' }
+        };
+
+        const form = document.getElementById('quizForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const resultBox = document.getElementById('resultBox');
+        const scoreSpan = document.getElementById('score');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const resetBtn = document.getElementById('resetBtn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let score = 0;
+            let answeredAll = true;
+            let userAnswers = {};
+
+            // Zbieranie odpowiedzi
+            for (let i = 1; i <= 6; i++) {
+                const questionName = 'q' + i;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                
+                if (!selectedOption) {
+                    answeredAll = false;
+                    break;
+                }
+                userAnswers[questionName] = selectedOption.value;
+            }
+
+            // Walidacja - czy wszystkie pytania mają odpowiedź
+            if (!answeredAll) {
+                errorMessage.classList.remove('hidden');
+                return;
+            } else {
+                errorMessage.classList.add('hidden');
+            }
+
+            // Sprawdzanie wyników
+            for (let i = 1; i <= 6; i++) {
+                const qKey = 'q' + i;
+                const container = document.getElementById(qKey + '-container');
+                const explanationDiv = container.querySelector('.explanation');
+                const radios = container.querySelectorAll('input[type="radio"]');
+
+                // Zablokuj możliwość zmiany odpowiedzi po sprawdzeniu
+                radios.forEach(radio => radio.disabled = true);
+
+                explanationDiv.innerHTML = quizData[qKey].explanation;
+                explanationDiv.classList.remove('hidden');
+
+                if (userAnswers[qKey] === quizData[qKey].answer) {
+                    score++;
+                    explanationDiv.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                    explanationDiv.classList.remove('bg-gray-50', 'bg-red-100', 'border-red-500', 'text-red-800');
+                } else {
+                    explanationDiv.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                    explanationDiv.classList.remove('bg-gray-50', 'bg-green-100', 'border-green-500', 'text-green-800');
+                }
+            }
+
+            // Wyświetlenie wyniku ogólnego
+            scoreSpan.innerText = score;
+            
+            if (score === 6) {
+                scoreMessage.innerText = "Bezbłędnie! Jesteś gotowy na sędziowanie w finale ligi!";
+            } else if (score >= 4) {
+                scoreMessage.innerText = "Dobry wynik! Znasz bardzo dobrze podstawowe zasady.";
+            } else {
+                scoreMessage.innerText = "Musisz jeszcze trochę poćwiczyć i poczytać regulamin.";
+            }
+
+            submitBtn.classList.add('hidden');
+            resultBox.classList.remove('hidden');
+        });
+
+        // Resetowanie quizu
+        resetBtn.addEventListener('click', function() {
+            form.reset();
+            submitBtn.classList.remove('hidden');
+            resultBox.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+
+            for (let i = 1; i <= 6; i++) {
+                const qKey = 'q' + i;
+                const container = document.getElementById(qKey + '-container');
+                const explanationDiv = container.querySelector('.explanation');
+                const radios = container.querySelectorAll('input[type="radio"]');
+
+                // Odblokuj radia
+                radios.forEach(radio => radio.disabled = false);
+
+                // Ukryj wyjaśnienia
+                explanationDiv.classList.add('hidden');
+                explanationDiv.classList.remove('bg-green-100', 'border-green-500', 'text-green-800', 'bg-red-100', 'border-red-500', 'text-red-800');
+                explanationDiv.classList.add('bg-gray-50');
+            }
+            
+            // Przewiń do góry
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
