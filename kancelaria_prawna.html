@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexGarda | Profesjonalna Kancelaria Prawna</title>
+    <meta name="description" content="Zapewniamy kompleksową obsługę prawną dla firm i osób prywatnych. Skuteczność, doświadczenie i pełna poufność.">
+    
+    <!-- Google Fonts: Playfair Display (Serif) for headings, Inter (Sans-serif) for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons for elegant, lightweight SVG icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#0f172a',    /* Deep professional blue */
+                            navylight: '#1e293b',
+                            gold: '#c5a059',    /* Elegant muted gold */
+                            goldhover: '#b08d4a',
+                            light: '#f8fafc',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Utilities */
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .stats-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1505664177941-10f653068692?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Smooth reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-600 bg-slate-50 antialiased selection:bg-brand-gold selection:text-white flex flex-col min-h-screen">
+
+    <!-- Header / Navigation -->
+    <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <i class="ph ph-scales text-3xl text-brand-gold transition-transform duration-300 group-hover:scale-110"></i>
+                <span class="font-serif text-2xl font-semibold tracking-wide text-white">LexGarda</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#o-nas" class="text-slate-200 hover:text-brand-gold text-sm font-medium transition-colors duration-200 uppercase tracking-wider">O nas</a>
+                <a href="#uslugi" class="text-slate-200 hover:text-brand-gold text-sm font-medium transition-colors duration-200 uppercase tracking-wider">Usługi</a>
+                <a href="#dlaczego-my" class="text-slate-200 hover:text-brand-gold text-sm font-medium transition-colors duration-200 uppercase tracking-wider">Wartości</a>
+                <a href="#kontakt" class="bg-brand-gold hover:bg-brand-goldhover text-white px-6 py-2.5 rounded-sm text-sm font-medium transition-colors duration-300 shadow-lg shadow-brand-gold/20">
+                    Bezpłatna wycena
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none p-2">
+                <i class="ph ph-list text-3xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-navy z-40 hidden flex-col pt-24 px-6 pb-8 h-screen w-screen transform translate-x-full transition-transform duration-300 ease-in-out">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-white p-2">
+                <i class="ph ph-x text-3xl"></i>
+            </button>
+            <nav class="flex flex-col gap-6 text-center mt-12">
+                <a href="#o-nas" class="mobile-link text-white text-xl font-serif hover:text-brand-gold transition-colors">O nas</a>
+                <a href="#uslugi" class="mobile-link text-white text-xl font-serif hover:text-brand-gold transition-colors">Usługi</a>
+                <a href="#dlaczego-my" class="mobile-link text-white text-xl font-serif hover:text-brand-gold transition-colors">Wartości</a>
+                <a href="#kontakt" class="mobile-link mt-8 bg-brand-gold text-white px-8 py-4 rounded-sm text-lg font-medium mx-auto inline-block">Skontaktuj się</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg relative min-h-screen flex items-center justify-center pt-20">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/60 via-transparent to-brand-navy/90 pointer-events-none"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center max-w-4xl mt-16">
+            <span class="inline-block py-1 px-3 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-sm font-medium tracking-widest uppercase mb-6 reveal">
+                Kancelaria Radców Prawnych
+            </span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-white font-bold leading-tight mb-6 reveal" style="transition-delay: 100ms;">
+                Zaufanie. Doświadczenie.<br>
+                <span class="text-brand-gold italic font-normal">Skuteczność.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed reveal" style="transition-delay: 200ms;">
+                Zapewniamy najwyższej jakości kompleksową obsługę prawną dla przedsiębiorców oraz klientów indywidualnych. Walczymy o Twoje prawa bez kompromisów.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal" style="transition-delay: 300ms;">
+                <a href="#kontakt" class="w-full sm:w-auto bg-brand-gold hover:bg-brand-goldhover text-white px-8 py-4 rounded-sm text-base font-medium transition-all duration-300 shadow-lg shadow-brand-gold/20 flex items-center justify-center gap-2">
+                    Skonsultuj swoją sprawę <i class="ph ph-arrow-right"></i>
+                </a>
+                <a href="#uslugi" class="w-full sm:w-auto bg-transparent hover:bg-white/5 border border-slate-400 text-white px-8 py-4 rounded-sm text-base font-medium transition-all duration-300 flex items-center justify-center">
+                    Poznaj nasze usługi
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="o-nas" class="py-24 bg-white relative">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <!-- Text Content -->
+                <div class="w-full lg:w-1/2 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-[1px] bg-brand-gold"></div>
+                        <span class="text-brand-gold font-semibold uppercase tracking-wider text-sm">O Kancelarii</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-serif text-brand-navy font-bold mb-6 leading-tight">
+                        Praktyka oparta na wiedzy i etyce zawodowej
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        LexGarda to zespół wykwalifikowanych radców prawnych i adwokatów. Od lat wspieramy naszych klientów w najbardziej złożonych procesach prawnych, negocjacjach biznesowych oraz sporach sądowych. Naszym priorytetem jest bezpieczeństwo i interes Mocodawcy.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed mb-8">
+                        Wierzymy, że skuteczna pomoc prawna wymaga nie tylko doskonałej znajomości przepisów, ale również zrozumienia biznesu i indywidualnej sytuacji klienta. Nie oferujemy szablonowych rozwiązań – szyjemy je na miarę.
+                    </p>
+                    
+                    <div class="flex items-center gap-6">
+                        <div class="flex -space-x-4">
+                            <img class="w-12 h-12 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="Prawnik 1">
+                            <img class="w-12 h-12 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="Prawnik 2">
+                            <img class="w-12 h-12 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" alt="Prawnik 3">
+                        </div>
+                        <div class="text-sm">
+                            <p class="font-semibold text-brand-navy">Ponad 15 ekspertów</p>
+                            <p class="text-slate-500">gotowych do działania</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Image Grid -->
+                <div class="w-full lg:w-1/2 reveal relative">
+                    <div class="grid grid-cols-2 gap-4 relative z-10">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=600" alt="Podpisywanie dokumentów" class="rounded-sm shadow-xl w-full h-64 object-cover mt-8">
+                        <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&q=80&w=600" alt="Konsultacje prawne" class="rounded-sm shadow-xl w-full h-64 object-cover">
+                    </div>
+                    <!-- Decorative element -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-slate-50 rounded-full z-0 pointer-events-none border border-slate-100"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="uslugi" class="py-24 bg-slate-50 border-t border-slate-100">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <div class="w-8 h-[1px] bg-brand-gold"></div>
+                    <span class="text-brand-gold font-semibold uppercase tracking-wider text-sm">Obszary Praktyki</span>
+                    <div class="w-8 h-[1px] bg-brand-gold"></div>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-serif text-brand-navy font-bold mb-4">W czym możemy Ci pomóc?</h2>
+                <p class="text-slate-600 text-lg">Świadczymy wyspecjalizowane usługi prawne, dostosowane do współczesnych wyzwań prawno-biznesowych.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 border border-slate-100 rounded-sm shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group reveal">
+                    <div class="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-6 border border-slate-100 group-hover:bg-brand-navy transition-colors duration-300">
+                        <i class="ph ph-buildings text-2xl text-brand-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-navy mb-3">Prawo Gospodarcze</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Pełna obsługa spółek, rejestracja działalności, sporządzanie umów B2B oraz reprezentacja w sporach między przedsiębiorcami.</p>
+                    <a href="#kontakt" class="text-brand-gold font-medium text-sm flex items-center gap-1 hover:gap-2 transition-all">Skonsultuj sprawę <i class="ph ph-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white p-8 border border-slate-100 rounded-sm shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group reveal" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-6 border border-slate-100 group-hover:bg-brand-navy transition-colors duration-300">
+                        <i class="ph ph-users text-2xl text-brand-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-navy mb-3">Prawo Rodzinne</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Dyskretna pomoc w sprawach rozwodowych, o podział majątku, alimenty oraz o ustalenie kontaktów z dziećmi.</p>
+                    <a href="#kontakt" class="text-brand-gold font-medium text-sm flex items-center gap-1 hover:gap-2 transition-all">Skonsultuj sprawę <i class="ph ph-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white p-8 border border-slate-100 rounded-sm shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group reveal" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-6 border border-slate-100 group-hover:bg-brand-navy transition-colors duration-300">
+                        <i class="ph ph-gavel text-2xl text-brand-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-navy mb-3">Prawo Karne</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Obrona w postępowaniu przygotowawczym i sądowym, a także reprezentacja pokrzywdzonych w sprawach karnych i karno-gospodarczych.</p>
+                    <a href="#kontakt" class="text-brand-gold font-medium text-sm flex items-center gap-1 hover:gap-2 transition-all">Skonsultuj sprawę <i class="ph ph-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white p-8 border border-slate-100 rounded-sm shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group reveal">
+                    <div class="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-6 border border-slate-100 group-hover:bg-brand-navy transition-colors duration-300">
+                        <i class="ph ph-house-line text-2xl text-brand-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-navy mb-3">Nieruchomości</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Badanie stanu prawnego nieruchomości, umowy deweloperskie, pomoc w procesie kupna/sprzedaży oraz sprawy o zasiedzenie.</p>
+                    <a href="#kontakt" class="text-brand-gold font-medium text-sm flex items-center gap-1 hover:gap-2 transition-all">Skonsultuj sprawę <i class="ph ph-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-white p-8 border border-slate-100 rounded-sm shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group reveal" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-6 border border-slate-100 group-hover:bg-brand-navy transition-colors duration-300">
+                        <i class="ph ph-briefcase text-2xl text-brand-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-navy mb-3">Prawo Pracy</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Wsparcie dla pracodawców oraz pracowników. Regulaminy pracy, sprawy o przywrócenie do pracy, mobbing i odszkodowania.</p>
+                    <a href="#kontakt" class="text-brand-gold font-medium text-sm flex items-center gap-1 hover:gap-2 transition-all">Skonsultuj sprawę <i class="ph ph-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-white p-8 border border-slate-100 rounded-sm shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group reveal" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-6 border border-slate-100 group-hover:bg-brand-navy transition-colors duration-300">
+                        <i class="ph ph-shield-check text-2xl text-brand-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-brand-navy mb-3">Odszkodowania</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Dochodzenie zadośćuczynień i odszkodowań za błędy medyczne, wypadki komunikacyjne oraz wypadki przy pracy.</p>
+                    <a href="#kontakt" class="text-brand-gold font-medium text-sm flex items-center gap-1 hover:gap-2 transition-all">Skonsultuj sprawę <i class="ph ph-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics / Banner -->
+    <section class="stats-bg py-20 relative">
+        <div class="absolute inset-0 bg-brand-navy/85"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                <div class="reveal">
+                    <div class="text-4xl md:text-5xl font-serif text-brand-gold font-bold mb-2">15+</div>
+                    <div class="text-slate-300 text-sm uppercase tracking-wider">Lat na rynku</div>
+                </div>
+                <div class="reveal" style="transition-delay: 100ms;">
+                    <div class="text-4xl md:text-5xl font-serif text-brand-gold font-bold mb-2">2500+</div>
+                    <div class="text-slate-300 text-sm uppercase tracking-wider">Zakończonych spraw</div>
+                </div>
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <div class="text-4xl md:text-5xl font-serif text-brand-gold font-bold mb-2">98%</div>
+                    <div class="text-slate-300 text-sm uppercase tracking-wider">Zadowolonych klientów</div>
+                </div>
+                <div class="reveal" style="transition-delay: 300ms;">
+                    <div class="text-4xl md:text-5xl font-serif text-brand-gold font-bold mb-2">24/7</div>
+                    <div class="text-slate-300 text-sm uppercase tracking-wider">Wsparcie prawne</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="dlaczego-my" class="py-24 bg-white">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <div class="lg:w-1/3 reveal">
+                    <h2 class="text-3xl md:text-4xl font-serif text-brand-navy font-bold mb-6">Dlaczego warto wybrać naszą kancelarię?</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed">Nasze podejście opiera się na pełnym zaangażowaniu, transparentności i rzetelnej ocenie szans. Nie obiecujemy rzeczy niemożliwych – dostarczamy realne, korzystne rezultaty.</p>
+                    <a href="#kontakt" class="inline-flex items-center gap-2 border-b-2 border-brand-gold text-brand-navy font-semibold pb-1 hover:text-brand-gold transition-colors">
+                        Umów spotkanie
+                    </a>
+                </div>
+                
+                <div class="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-10">
+                    <div class="flex gap-4 reveal" style="transition-delay: 100ms;">
+                        <div class="shrink-0 mt-1">
+                            <i class="ph ph-target text-3xl text-brand-gold"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-serif font-bold text-brand-navy mb-2">Indywidualne podejście</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">Każda sprawa jest inna. Dokładnie analizujemy Twój problem, aby dobrać optymalną strategię prawną dopasowaną do Twoich celów.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 reveal" style="transition-delay: 200ms;">
+                        <div class="shrink-0 mt-1">
+                            <i class="ph ph-lock-key text-3xl text-brand-gold"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-serif font-bold text-brand-navy mb-2">Pełna poufność</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">Tajemnica radcowska i adwokacka to dla nas świętość. Gwarantujemy absolutną dyskrecję na każdym etapie współpracy.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 reveal" style="transition-delay: 300ms;">
+                        <div class="shrink-0 mt-1">
+                            <i class="ph ph-chart-line-up text-3xl text-brand-gold"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-serif font-bold text-brand-navy mb-2">Jasne zasady rozliczeń</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">Stosujemy przejrzyste modele wynagradzania. Przed podjęciem działań zawsze wiesz, jakie będą przewidywane koszty obsługi prawnej.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 reveal" style="transition-delay: 400ms;">
+                        <div class="shrink-0 mt-1">
+                            <i class="ph ph-clock text-3xl text-brand-gold"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-serif font-bold text-brand-navy mb-2">Szybkość działania</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">W prawie czas często odgrywa kluczową rolę. Reagujemy błyskawicznie, zabezpieczając Twoje interesy w trybie pilnym.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontakt" class="py-24 bg-brand-navy relative overflow-hidden">
+        <!-- Abstract background shapes -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+        
+        <div class="container mx-auto px-6 lg:px-12 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16 bg-white rounded-sm shadow-2xl overflow-hidden reveal">
+                
+                <!-- Contact Info (Left) -->
+                <div class="w-full lg:w-2/5 bg-brand-navylight p-10 lg:p-14 text-white relative">
+                    <h3 class="text-2xl font-serif font-bold mb-2">Skontaktuj się z nami</h3>
+                    <p class="text-slate-400 mb-10 text-sm">Zadzwoń do nas, napisz wiadomość lub odwiedź nasze biuro. Odpowiemy tak szybko, jak to możliwe.</p>
+                    
+                    <div class="flex flex-col gap-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center shrink-0">
+                                <i class="ph ph-phone text-brand-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-slate-400 mb-1">Infolinia / Kontakt</h4>
+                                <p class="font-medium tracking-wider">+48 500 000 000</p>
+                                <p class="font-medium tracking-wider mt-1">+48 500 000 001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center shrink-0">
+                                <i class="ph ph-envelope-simple text-brand-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-slate-400 mb-1">Adres e-mail</h4>
+                                <p class="font-medium">kancelaria@lexgarda.pl</p>
+                                <p class="font-medium mt-1">sekretariat@lexgarda.pl</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center shrink-0">
+                                <i class="ph ph-map-pin text-brand-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-slate-400 mb-1">Siedziba Główna</h4>
+                                <p class="font-medium">ul. Przykładowa 15/4</p>
+                                <p class="font-medium">00-001 Miasto Prawne</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form (Right) -->
+                <div class="w-full lg:w-3/5 p-10 lg:p-14">
+                    <h3 class="text-2xl font-serif font-bold text-brand-navy mb-8">Opisz swoją sprawę</h3>
+                    
+                    <!-- Form Wrapper -->
+                    <div id="form-container">
+                        <form id="contact-form" class="flex flex-col gap-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-slate-600 mb-2">Imię i nazwisko</label>
+                                    <input type="text" id="name" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold transition-colors text-slate-700">
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-slate-600 mb-2">Numer telefonu</label>
+                                    <input type="tel" id="phone" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold transition-colors text-slate-700">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-600 mb-2">Adres e-mail</label>
+                                <input type="email" id="email" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold transition-colors text-slate-700">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-600 mb-2">Treść wiadomości</label>
+                                <textarea id="message" rows="4" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold transition-colors text-slate-700 resize-none"></textarea>
+                            </div>
+                            
+                            <div class="flex items-start gap-3 mt-2">
+                                <input type="checkbox" id="rodo" required class="mt-1 w-4 h-4 text-brand-gold border-slate-300 rounded focus:ring-brand-gold">
+                                <label for="rodo" class="text-xs text-slate-500 leading-relaxed">
+                                    Wyrażam zgodę na przetwarzanie moich danych osobowych w celu udzielenia odpowiedzi na zapytanie przesłane za pomocą formularza kontaktowego, zgodnie z <a href="#" class="text-brand-gold underline">Polityką Prywatności</a>.
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="mt-4 bg-brand-navy hover:bg-slate-800 text-white px-8 py-4 rounded-sm text-sm font-medium transition-colors duration-300 w-full sm:w-auto self-start flex items-center gap-2">
+                                Wyślij wiadomość <i class="ph ph-paper-plane-tilt"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Success Message (Hidden by default) -->
+                    <div id="success-message" class="hidden flex-col items-center justify-center text-center py-12">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                            <i class="ph ph-check-circle text-4xl text-green-600"></i>
+                        </div>
+                        <h4 class="text-2xl font-serif font-bold text-brand-navy mb-2">Dziękujemy za wiadomość!</h4>
+                        <p class="text-slate-600">Została wysłana pomyślnie. Nasz zespół skontaktuje się z Państwem w ciągu 24 godzin.</p>
+                        <button id="reset-form" class="mt-8 text-brand-gold font-medium hover:underline">Wyślij kolejną wiadomość</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0b1120] text-slate-400 pt-16 pb-8 border-t border-white/5 mt-auto">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <a href="#" class="flex items-center gap-2 mb-6">
+                        <i class="ph ph-scales text-2xl text-brand-gold"></i>
+                        <span class="font-serif text-xl font-semibold text-white">LexGarda</span>
+                    </a>
+                    <p class="text-sm leading-relaxed mb-6">
+                        Skuteczna ochrona prawna oparta na wieloletnim doświadczeniu i głębokiej wiedzy prawniczej. Twój zaufany partner w biznesie i życiu prywatnym.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-medium mb-6 uppercase tracking-wider text-sm">Szybkie linki</h4>
+                    <ul class="flex flex-col gap-3 text-sm">
+                        <li><a href="#o-nas" class="hover:text-brand-gold transition-colors">O Kancelarii</a></li>
+                        <li><a href="#uslugi" class="hover:text-brand-gold transition-colors">Specjalizacje</a></li>
+                        <li><a href="#dlaczego-my" class="hover:text-brand-gold transition-colors">Dlaczego my</a></li>
+                        <li><a href="#kontakt" class="hover:text-brand-gold transition-colors">Kontakt</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Kariera</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-medium mb-6 uppercase tracking-wider text-sm">Obszary Praktyki</h4>
+                    <ul class="flex flex-col gap-3 text-sm">
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Prawo Gospodarcze</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Prawo Rodzinne</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Prawo Karne</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Prawo Nieruchomości</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Odszkodowania</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Working hours -->
+                <div>
+                    <h4 class="text-white font-medium mb-6 uppercase tracking-wider text-sm">Godziny otwarcia</h4>
+                    <ul class="flex flex-col gap-3 text-sm">
+                        <li class="flex justify-between"><span>Poniedziałek - Piątek</span> <span>08:00 - 18:00</span></li>
+                        <li class="flex justify-between"><span>Sobota</span> <span>09:00 - 13:00</span></li>
+                        <li class="flex justify-between text-slate-500"><span>Niedziela</span> <span>Zamknięte</span></li>
+                    </ul>
+                    <p class="mt-6 text-xs text-brand-gold bg-brand-gold/10 p-3 rounded-sm inline-block">
+                        W pilnych sprawach karnych dostępni jesteśmy całodobowo.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs">
+                <p>&copy; 2026 Kancelaria Prawna LexGarda. Wszelkie prawa zastrzeżone.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Polityka Prywatności</a>
+                    <a href="#" class="hover:text-white transition-colors">Nota Prawna</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Logic ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMenu() {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                
+                if (isOpen) {
+                    mobileMenu.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300); // match duration
+                } else {
+                    mobileMenu.classList.remove('hidden');
+                    // Small delay to allow display:block to apply before transforming
+                    setTimeout(() => {
+                        mobileMenu.classList.remove('translate-x-full');
+                    }, 10);
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+            closeMenuBtn.addEventListener('click', toggleMenu);
+            
+            // Close mobile menu when clicking a link
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+
+            // --- Sticky Header Logic ---
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('glass-nav');
+                    header.classList.remove('bg-transparent', 'py-4');
+                    header.classList.add('py-2');
+                } else {
+                    header.classList.remove('glass-nav', 'py-2');
+                    header.classList.add('bg-transparent', 'py-4');
+                }
+            });
+
+            // --- Scroll Reveal Animation ---
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealOnScroll.observe(el);
+            });
+
+            // --- Contact Form Handling ---
+            // Prevent default submission and show inline success message
+            const form = document.getElementById('contact-form');
+            const formContainer = document.getElementById('form-container');
+            const successMessage = document.getElementById('success-message');
+            const resetBtn = document.getElementById('reset-form');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Stop page reload
+                
+                // Simulate form processing
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = 'Wysyłanie... <i class="ph ph-spinner-gap animate-spin"></i>';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    // Hide form, show success
+                    formContainer.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                    successMessage.classList.add('flex');
+                    
+                    // Reset button state
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    form.reset();
+                }, 1200);
+            });
+
+            resetBtn.addEventListener('click', () => {
+                successMessage.classList.add('hidden');
+                successMessage.classList.remove('flex');
+                formContainer.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
